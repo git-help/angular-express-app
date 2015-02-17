@@ -5,14 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+// Always relative paths in Express
+var routes = require('./router/index');
+var users = require('./router/routes/users');
 
 /**
  * Route Imports
  */
 
-var signup = require('./routes/signup'); 
+// var signup = require('./routes/signup'); ---Refactor
 
 var app = express();
 
@@ -69,7 +70,16 @@ if (app.get('env') === 'production') {
 /**
  * Routes
  */
-app.use('/signup', signup);
+var router = require('./router')(app);
+
+// Pulling in router/index.js, passing it
+// an instance of our Express application
+
+// Error Handling
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+});
+
 
 
 module.exports = app;
