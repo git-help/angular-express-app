@@ -8,6 +8,12 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+/**
+ * Route Imports
+ */
+
+var signup = require('./routes/signup'); 
+
 var app = express();
 
 // view engine setup
@@ -23,7 +29,7 @@ app.use(cookieParser());
 /**
  * Development Settings
  */
- 
+
 if (app.get('env') === 'development') {
     // This will change in production since we'll be using the dist folder
     app.use(express.static(path.join(__dirname, '../client')));
@@ -60,5 +66,12 @@ if (app.get('env') === 'production') {
     });
 }
 
+/**
+ * Routes
+ */
+app.use('/signup', signup);
+
 
 module.exports = app;
+
+
