@@ -31,3 +31,30 @@
     >Production ready application will be served on localhost:3000
   
   Now, your server folder is what you'd deploy
+
+# Project 3 readme draft...
+## JavaScript Stack - MEAN
+[mongo]() - 
+[ExpressJS]() -
+[AngularJS]() - front-end framework
+[NodeJS]() - 
+ 
+## Build/Scaffolding Tools
+[yeoman]()
+[yeoman-generator angular-fullstack](https://github.com/DaftMonk/generator-angular-fullstack#controller)
+[Grunt]() - Build automation
+
+### Angular-specific Tools
+[UI router]() - for routing in Angular
+[sass]() - CSS pre-compiler
+[jade? html?]() - for markup (and templating w/Jade?)
+
+
+### Front-end Dependencies
+[Bower]() - front-end dependency package manager
+[Bootstrap Material Design]() - Bootstrap 'theme' based on [Google's Material Design principles]()
+
+> for real-time data
+>* [Firebase]()
+>* [Firepad]()
+>* [AngularFire]()
