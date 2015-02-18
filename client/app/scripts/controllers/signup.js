@@ -51,11 +51,11 @@ angular.module('clientApp') // make sure this is set to whatever it is in your c
 				// our json response is recognized
 				// as the data param here. See?
 				// The msg value is right there!
-				console.log(data.msg);
+				console.log(data);
 			});
  
 			request.error(function (data) {
-				console.log(data.msg);
+				console.log(data);
 			});
  
 		};
