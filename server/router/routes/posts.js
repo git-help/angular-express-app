@@ -15,9 +15,6 @@ var moment = require('moment');
 var _ = require('underscore');
 var color = require('cli-color');
 
-var bodyParser = require('body-parser');
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
  /*               *
@@ -32,17 +29,23 @@ var db = require('../../database');
 var Post = db.posts;
 
 
-/***************/
- //            //
- // Routes     //
- //            //
-/***************/
+/******************************************************************/
+ //                                                               //
+ // ROUTES                                                        //
+ //                                                               //
+ // Using Rails-like standard naming convention for endpoints.    //
+ // GET     /posts              ->  index                         //
+ // POST    /posts              ->  create                        //
+ // GET     /posts/:id          ->  show                          //
+ // PUT     /posts/:id          ->  update                        //
+ // DELETE  /posts/:id          ->  destroy                       //
+ //                                                               //
+/******************************************************************/
 
 // on routes that end in /posts
-// - - - - - - - - - - - - - - - 
 router.route('/')
-
-  /* GET all posts */
+  /* GET to read all posts */ 
+  // accessed at (/posts)
   .get(function(req, res, next) {
     // Query db for all Posts
     Post.find({}, function (err, posts) {
@@ -61,7 +64,8 @@ router.route('/')
 
   })
 
-  /* POST to create a new post */
+  /* POST to create a new post */ 
+  // accessed at (/posts)
   .post(function (req, res, next) {
 
     // set req params to local variables
@@ -98,12 +102,12 @@ router.route('/')
 
 
 // on routes that end in /posts/:post_id
-// - - - - - - - - - - - - - - - - - - -
 // first, create a new router.route() for reqs w/:post_id
 // remember! in Express 4 /posts is assumed, so we use /:post_id
-
 router.route('/:post_id')
   /* GET posts by id */
+  // find the post with this id 
+  // accessed at (/posts/:post_id)
   .get(function (req, res) {
     post_id = req.params.post_id;
 
@@ -125,6 +129,8 @@ router.route('/:post_id')
   })
 
   /* PUT posts by id */
+  // update the post with this id 
+  // accessed at (/posts/:post_id)
   .put(function (req, res) {
     // first set req params to local variables
     var title = req.body.title,
@@ -158,7 +164,9 @@ router.route('/:post_id')
   })
 
   .delete(function (req, res) {
-    // delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
+    /* DELETE posts by id */
+    // delete the post with this id 
+    // accessed at (/posts/:post_id)
     Post.remove({ _id: req.params.post_id }, function (err, post) {
       // If there's an error...
       if (err) {
@@ -169,118 +177,12 @@ router.route('/:post_id')
             'message': 'Internal server error.'
         });
       }
-      // on successful save, respond with msg
+      // on successful delete, respond with msg
       res.status(201).json({ message: 'Successfully deleted!'});
     });
   });
 
-
-/* GET single post */
-
-/* PUT update a post */
-
-/* DELETE delete a post */
-
-
-
-// /* GET single post. */
-// router.get('/:id', function(req, res, next) {
-
-//   // Query db for all Posts
-//   Posts.findById({id: req.params.id}, function (err, post) {
-
-//     // If there's an error, log it and return to user
-//     if (err) {
-
-//         // Nice log message on your end, so that you can see what happened
-//         console.log('Couldn\'t get all posts because of ' + err);
-
-//         // send the error
-//         res.status(500).json({
-//             'message': 'Internal server error.'
-//         });
-//     }
-//     if(!post) { return res.send(404); }
-
-//     // send posts as JSON object
-//     res.status(201).json(post);
-//   });
-
-// });
-
-
-// // Get a single thing
-// exports.show = function(req, res) {
-//   Thing.findById(req.params.id, function (err, thing) {
-//     if(err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     return res.json(thing);
-//   });
-// };
-
-
-
-
-
-
-// // Updates an existing thing in the DB.
-// exports.update = function(req, res) {
-//   if(req.body._id) { delete req.body._id; }
-//   Thing.findById(req.params.id, function (err, thing) {
-//     if (err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     var updated = _.merge(thing, req.body);
-//     updated.save(function (err) {
-//       if (err) { return handleError(res, err); }
-//       return res.json(200, thing);
-//     });
-//   });
-// };
-
-
-
-
-
-
-// // Deletes a thing from the DB.
-// exports.destroy = function(req, res) {
-//   Thing.findById(req.params.id, function (err, thing) {
-//     if(err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     thing.remove(function(err) {
-//       if(err) { return handleError(res, err); }
-//       return res.send(204);
-//     });
-//   });
-// };
-
-
-
-
-
-
-
-// Expose the module
-// export the router for usage in our server/router/index.js
-module.exports = router;
-
-
-/**
- * Using Rails-like standard naming convention for endpoints.
- * GET     /things              ->  index
- * POST    /things              ->  create
- * GET     /things/:id          ->  show
- * PUT     /things/:id          ->  update
- * DELETE  /things/:id          ->  destroy
- */
-
-// router.get('/', controller.index);
-// router.get('/:id', controller.show);
-// router.post('/', controller.create);
-// router.put('/:id', controller.update);
-// router.patch('/:id', controller.update);
-// router.delete('/:id', controller.destroy);
-
+// potential refactor for DRY errors... pull it out into a single fn
 // exports.index = function(req, res) {
 //   Thing.find(function (err, things) {
 //     if(err) { return handleError(res, err); }
@@ -288,49 +190,11 @@ module.exports = router;
 //   });
 // };
 
-// // Get a single thing
-// exports.show = function(req, res) {
-//   Thing.findById(req.params.id, function (err, thing) {
-//     if(err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     return res.json(thing);
-//   });
-// };
-
-// // Creates a new thing in the DB.
-// exports.create = function(req, res) {
-//   Thing.create(req.body, function(err, thing) {
-//     if(err) { return handleError(res, err); }
-//     return res.json(201, thing);
-//   });
-// };
-
-// // Updates an existing thing in the DB.
-// exports.update = function(req, res) {
-//   if(req.body._id) { delete req.body._id; }
-//   Thing.findById(req.params.id, function (err, thing) {
-//     if (err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     var updated = _.merge(thing, req.body);
-//     updated.save(function (err) {
-//       if (err) { return handleError(res, err); }
-//       return res.json(200, thing);
-//     });
-//   });
-// };
-
-// // Deletes a thing from the DB.
-// exports.destroy = function(req, res) {
-//   Thing.findById(req.params.id, function (err, thing) {
-//     if(err) { return handleError(res, err); }
-//     if(!thing) { return res.send(404); }
-//     thing.remove(function(err) {
-//       if(err) { return handleError(res, err); }
-//       return res.send(204);
-//     });
-//   });
-// };
-
 // function handleError(res, err) {
-//   return res.send(500, err);
-// }
+// //   return res.send(500, err);
+// // }
+
+
+// Expose the module
+// export the router for usage in our server/router/index.js
+module.exports = router;
