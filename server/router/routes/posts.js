@@ -155,6 +155,23 @@ router.route('/:post_id')
           res.status(201).json(post);
         })
     });
+  })
+
+  .delete(function (req, res) {
+    // delete the bear with this id (accessed at DELETE http://localhost:8080/api/bears/:bear_id)
+    Post.remove({ _id: req.params.post_id }, function (err, post) {
+      // If there's an error...
+      if (err) {
+        // log it and...
+        console.log('Couldn\'t get all posts because of ' + err);
+        // send the error to user
+        res.status(500).json({
+            'message': 'Internal server error.'
+        });
+      }
+      // on successful save, respond with msg
+      res.status(201).json({ message: 'Successfully deleted!'});
+    });
   });
 
 

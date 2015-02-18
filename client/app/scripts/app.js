@@ -36,8 +36,8 @@ angular
       .when('/posts', {
         templateUrl: 'views/posts.html',
         controller: 'PostsCtrl'
+      })
+      .otherwise({
+        redirectTo: '/'
       });
-      // .otherwise({
-      //   redirectTo: '/'
-      // });
   });
