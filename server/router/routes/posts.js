@@ -93,8 +93,10 @@ router.route('/')
             'message': 'Internal server error.'
         });
       }
-      // on successful save, respond with msg
-      res.status(201).json({message: 'Post Created!'});
+      // on successful save, respond with id
+      // so that we can provide front-end a 'hook'
+      // without refreshing the page
+      res.status(201).json(newPost.id);
     });
 
 });

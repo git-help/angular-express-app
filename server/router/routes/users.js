@@ -94,7 +94,7 @@ router.route('/')
         });
       }
       // on successful save, respond with msg
-      res.status(201).json({message: 'User Created!'});
+      res.status(201).json(newUser.id);
     });
 
 });

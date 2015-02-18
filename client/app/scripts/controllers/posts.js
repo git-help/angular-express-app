@@ -47,6 +47,7 @@ angular.module('clientApp')
       .success(function (data) {
         $scope.status = 'Updated Post! Refreshing post list.';
         that.editing = false;
+        console.log(data);
       });
       
     };
@@ -71,10 +72,15 @@ angular.module('clientApp')
 
     $scope.createPost = function () {
       var post = $scope.newPost;
-      console.log(post);
       postFactory.createPost(post)
-        .success(function () {
+        .success(function (data) {
           $scope.status = 'created Post! Refreshing Post list.';
+          // post._id is returned from API
+          // to allow on-page editing, we need this _id
+          // to 'hook' onto.
+          // therefore, we add the key/value to the post
+          // before sending to the $scope
+          post._id = data;
           $scope.posts.push(post);
           $scope.newPost = {};
         }).
