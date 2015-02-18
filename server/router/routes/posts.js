@@ -15,6 +15,9 @@ var moment = require('moment');
 var _ = require('underscore');
 var color = require('cli-color');
 
+var bodyParser = require('body-parser');
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
  /*               *
@@ -36,9 +39,10 @@ var Post = db.posts;
 /***************/
 
 // on routes that end in /posts
-// ----------------------------------------------------
-/* GET all posts */
+// - - - - - - - - - - - - - - - 
 router.route('/')
+
+  /* GET all posts */
   .get(function(req, res, next) {
     // Query db for all Posts
     Post.find({}, function (err, posts) {
@@ -57,46 +61,103 @@ router.route('/')
 
   })
 
+  /* POST to create a new post */
+  .post(function (req, res, next) {
 
-/* POST to create a new post */
-.post(function (req, res, next) {
+    // set req params to local variables
+    var title = req.body.title,
+        text  = req.body.text,
+        url   = req.body.url;
 
-  // set req params to local variables
-  var title = req.body.title,
-      text  = req.body.text,
-      url   = req.body.url;
+    // create a new instance of the Post model
+    var newPost = new Post({
+                          'title': title,
+                          'url'  : url,
+                          'text' : text
+    });
 
-  // create a new instance of the Post model
-  var newPost = new Post({
-                        'title': title,
-                        'url'  : url,
-                        'text' : text
-  });
+    // save instance to db
+    newPost.save(function (err, newPost) {
 
-  // save instance to db
-  newPost.save(function (err, newPost) {
+      // If there's an error, log it and return to user
+      if (err) {
 
-    // If there's an error, log it and return to user
-    if (err) {
+        console.log('Couldn\'t get all posts because of ' + err);
 
-      console.log('Couldn\'t get all posts because of ' + err);
-
-      // send the error
-      res.status(500).json({
-          'message': 'Internal server error.'
-      });
-    }
-    // on successful save, respond with msg
-    res.status(201).json({message: 'Post Created!'});
-  });
+        // send the error
+        res.status(500).json({
+            'message': 'Internal server error.'
+        });
+      }
+      // on successful save, respond with msg
+      res.status(201).json({message: 'Post Created!'});
+    });
 
 });
 
-// on routes that end in /posts/:post_id
-// ----------------------------------------------------
-// first, create a new router.route() for reqs w/:post_id
 
-router.route('/posts/:post_id').get(function (req, res) {})
+
+// on routes that end in /posts/:post_id
+// - - - - - - - - - - - - - - - - - - -
+// first, create a new router.route() for reqs w/:post_id
+// remember! in Express 4 /posts is assumed, so we use /:post_id
+
+router.route('/:post_id')
+  /* GET posts by id */
+  .get(function (req, res) {
+    post_id = req.params.post_id;
+
+    Post.findById(post_id, function (err, post) {
+      // If there's an error, log it and return to user
+      if (err) {
+
+        console.log('Couldn\'t get all posts because of ' + err);
+
+        // send the error
+        res.status(500).json({
+            'message': 'Internal server error.'
+        });
+      }
+      // on successful save, respond with msg
+      res.status(201).json(post);
+    });
+
+  })
+
+  /* PUT posts by id */
+  .put(function (req, res) {
+    // first set req params to local variables
+    var title = req.body.title,
+        text  = req.body.text,
+        url   = req.body.url,
+        post_id = req.params.post_id;
+
+    // then, use Model to find the post we want
+    Post.findById(req.params.post_id, function (err, post) {
+        // If there's an error, log it...
+        if (err) {
+          console.log('Couldn\'t get all posts because of ' + err);
+          // and send the error to the user
+          res.status(500).json({
+              'message': 'Internal server error.'
+          });
+        }
+
+        // if no error, update the post and...
+        post.title = title;
+        post.text  = text;
+        post.url   = url;
+
+        // save the post
+        post.save(function (err) {
+          if (err){ res.send(err);}
+          // on successful update, respond with post object
+          res.status(201).json(post);
+        })
+    });
+  });
+
+
 /* GET single post */
 
 /* PUT update a post */
