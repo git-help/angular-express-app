@@ -27,7 +27,7 @@ angular.module('clientApp')
       return $http.get(urlBase + '/' + id);
     };
     //UPDATE
-    postFactory.updatePost = function (post) {
+    postFactory.updatePost = function (id, post) {
       console.log(post._id);
       var post_id = post._id;
       return $http.put(urlBase + '/' + post._id);
