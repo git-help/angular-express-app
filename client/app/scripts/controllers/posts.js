@@ -27,60 +27,47 @@ angular.module('clientApp')
         });
     };
 
-    
-    // // //update a post
-    // $scope.updatePost = function (post) {
-    //   // console.log(this.post._id);
-    //   console.log(this.post);
-    //   var post = this.post;
-    //   console.log(post._id);
-    //   console.log(post.title);
-    //   var that = this;
-    //   // need to figure out how to pass
-    //   // in the object... and build the correct path... 
-    //   // maybe we can start declaring variables here... 
-    //   //e.g. var reqUrl = /posts/post._id
-    //   //reqParams = this.title, this.text, this.url
-    //   //or just NOT use the service for update..
-    //   //and build it long-hand.
-    //   postFactory.updatePost('/posts/'+ post._id , { 
-    //                                     title: post.title,
-    //                                     text: post.text,
-    //                                     url: post.url })
-    //   .error(function (data, status, headers, config) {
-    //     $scope.formError = true;
-    //     $scope.status = 'Unable to update post: ' + data;
-    //   })
-    //   .success(function (data) {
-    //     $scope.status = 'Updated Post! Refreshing post list.';
-    //     that.editing = false;
-    //   });
-      
-    // };
-
     //edit a post, when triggered, the edit form will show
     $scope.editPost = function () {
       // console.log(this.editing);
       this.editing = true;
     };
-    //update a post w/o postFactory method.
+    // //update a post
     $scope.updatePost = function (post) {
       var post = this.post;
-      console.log(this.post._id);
-      console.log(this.post.title);
       var that = this;
-      $http.put('/posts/'+ post._id , { 
-                                        title: this.post.title,
-                                        text: this.post.text,
-                                        url: this.post.url })
-           .error(function () {
-             $scope.formError = true;
-           })
-           .success(function (data) {
-             that.editing = false;
-           })
-           ;
+      postFactory.updatePost(post._id , { 
+                                        title: post.title,
+                                        text: post.text,
+                                        url: post.url })
+      .error(function (data, status, headers, config) {
+        $scope.formError = true;
+        $scope.status = 'Unable to update post: ' + data;
+      })
+      .success(function (data) {
+        $scope.status = 'Updated Post! Refreshing post list.';
+        that.editing = false;
+      });
+      
     };
+    //update a post w/o postFactory method.
+    // $scope.updatePost = function (post) {
+    //   var post = this.post;
+    //   console.log(this.post._id);
+    //   console.log(this.post.title);
+    //   var that = this;
+    //   $http.put('/posts/'+ post._id , { 
+    //                                     title: this.post.title,
+    //                                     text: this.post.text,
+    //                                     url: this.post.url })
+    //        .error(function () {
+    //          $scope.formError = true;
+    //        })
+    //        .success(function (data) {
+    //          that.editing = false;
+    //        })
+    //        ;
+    // };
 
     $scope.createPost = function () {
       var post = $scope.newPost;

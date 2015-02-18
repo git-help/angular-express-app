@@ -27,10 +27,8 @@ angular.module('clientApp')
       return $http.get(urlBase + '/' + id);
     };
     //UPDATE
-    postFactory.updatePost = function (id, post) {
-      console.log(post._id);
-      var post_id = post._id;
-      return $http.put(urlBase + '/' + post._id);
+    postFactory.updatePost = function (id, data) {
+      return $http.put(urlBase + '/' + id, data);
     };
     //DELETE
     postFactory.deletePost = function (id) {
@@ -40,38 +38,3 @@ angular.module('clientApp')
     // return Factory to caller
     return postFactory;
 }]);
-
-// Using an AngularJS Factory to Interact with a RESTful Service - http://weblogs.asp.net/dwahlin/using-an-angularjs-factory-to-interact-with-a-restful-service
-
-// angular.module('customersApp')
-//     .factory('dataFactory', ['$http', function($http) {
-
-//     var urlBase = '/api/customers';
-//     var dataFactory = {};
-
-//     dataFactory.getCustomers = function () {
-//         return $http.get(urlBase);
-//     };
-
-//     dataFactory.getCustomer = function (id) {
-//         return $http.get(urlBase + '/' + id);
-//     };
-
-//     dataFactory.insertCustomer = function (cust) {
-//         return $http.post(urlBase, cust);
-//     };
-
-//     dataFactory.updateCustomer = function (cust) {
-//         return $http.put(urlBase + '/' + cust.ID, cust)
-//     };
-
-//     dataFactory.deleteCustomer = function (id) {
-//         return $http.delete(urlBase + '/' + id);
-//     };
-
-//     dataFactory.getOrders = function (id) {
-//         return $http.get(urlBase + '/' + id + '/orders');
-//     };
-
-//     return dataFactory;
-// }]);

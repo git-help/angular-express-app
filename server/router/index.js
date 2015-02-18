@@ -11,4 +11,7 @@ module.exports = function (app) {
 
     // The posts route
     app.use('/posts', require('./routes/posts'));
+
+    // The users route
+    app.use('/users', require('./routes/users'));
 }

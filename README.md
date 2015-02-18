@@ -70,3 +70,7 @@
   Install the generator globally: npm install -g generator-express
   Run: yo express and select Basic. Add --coffee if you require CoffeeScript.
   Run: grunt or gulp to run the local server at localhost:3000, the grunt/gulp tasks include live reloading for views, css in public/css and restarting the server for changes to app.js or js in routes/
+
+TO DO 
+write about our feeling of "not coding enough"
+decision to go the "hard way" knowing that focusing on a particular set of tools for a month will make us actually "know it" and we didnt want to wait a week and just do a project that showcased rails.
