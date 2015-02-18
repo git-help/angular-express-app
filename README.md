@@ -62,6 +62,7 @@
 
 #### Key Resources/References
   >* [Building an Angular and Express App (parts 1-3) by J Cole Morrison](http://start.jcolemorrison.com/building-an-angular-and-express-app-part-1/) - detailed tutorial on setting up a simple "MEAN" app.
+  >* [Using an AngularJS Factory to Interact with a RESTful Service](http://weblogs.asp.net/dwahlin/using-an-angularjs-factory-to-interact-with-a-restful-service) - great article on how to consume a RESTful API using an Angular Factory.
 
   Getting started
 
