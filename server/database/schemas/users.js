@@ -1,20 +1,70 @@
-/**
- * Our Schema for Users
- */
+////////////////////////////////////////////////////////////////////////////////
+ /*                         *
+ ** User Schema            **
+ *                         */
+////////////////////////////////////////////////////////////////////////////////
+
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 
-// Define the User Schema
+/***************/
+ //            //
+ // Define     //
+ //            //
+/***************/
 var userSchema = new Schema({
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    firstname: { type: String, required: true, trim:true},
+    lastname: { type: String, required: true, trim: true },
+    email: { type: String, required: true, trim: true, unique: true },
     password: { type: String, required: true },
     profile: {} // for extra information you may / may not want
+    // role: {
+    //     type:String,
+    //     enum: roles,
+    //     required: true,
+    //     default: roles[0]
+    //     },
+    // admin: {
+    //     type: Boolean,
+    //     default: false,
+    // },
+    // photoUrl: String,
+    // angelListId: String,
+    // angelListProfile: Schema.Types.Mixed,
+    // angelToken: String,
+    // githubProfile: Schema.Types.Mixed,
+    // githubToken: String,
+    // angelList: Schema.Types.Mixed,
+    // created: {
+      // type: Date,
+      // default: Date.now
+    // },
+    // updated:  {
+      // type: Date,
+      // default: Date.now
+    // },
+    // angelUrl: String,
+    // twitterUrl: String,
+    // facebookUrl: String,
+    // linkedinUrl: String,
+    // githubUrl: String,
+    // posts: {
+      // own: [Schema.Types.Mixed],
+      // likes: [Schema.Types.Mixed],
+      // watches: [Schema.Types.Mixed],
+      // comments: [Schema.Types.Mixed]
+    // },
+    // stripeToken: Schema.Types.Mixed
 });
 
-// A method that's called every time a user document is saved..
+/****************************/
+ //                         //
+ // Check for user Auth     //
+ //                         //
+/****************************/
+
+// A method that's called every time a user document is saved...
 userSchema.pre('save', function (next) {
 
     var user = this;
@@ -42,6 +92,11 @@ userSchema.pre('save', function (next) {
     });
 });
 
+/*************************************/
+ //                                  //
+ // Password Verification Helper     //
+ //                                  //
+/*************************************/
 // Password verification helper
 userSchema.methods.comparePassword = function (triedPassword, cb) {
     bcrypt.compare(triedPassword, this.password, function(err, isMatch) {
@@ -50,7 +105,11 @@ userSchema.methods.comparePassword = function (triedPassword, cb) {
     });
 };
 
-// The primary user model
+/****************************/
+ //                         //
+ // Export Primary Model    //
+ //                         //
+/****************************/
 var User = mongoose.model('User', userSchema);
 
 module.exports = User;

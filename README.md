@@ -62,3 +62,10 @@
 
 #### Key Resources/References
   >* [Building an Angular and Express App (parts 1-3) by J Cole Morrison](http://start.jcolemorrison.com/building-an-angular-and-express-app-part-1/) - detailed tutorial on setting up a simple "MEAN" app.
+
+  Getting started
+
+  Make sure you have yo installed: npm install -g yo
+  Install the generator globally: npm install -g generator-express
+  Run: yo express and select Basic. Add --coffee if you require CoffeeScript.
+  Run: grunt or gulp to run the local server at localhost:3000, the grunt/gulp tasks include live reloading for views, css in public/css and restarting the server for changes to app.js or js in routes/

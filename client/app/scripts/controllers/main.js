@@ -9,6 +9,7 @@
  */
 angular.module('clientApp')
   .controller('MainCtrl', function ($scope) {
+    $scope.greeting = 'hello angelo';
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

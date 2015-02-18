@@ -1,8 +1,12 @@
-/**
- * Our Database Interface
- */
+////////////////////////////////////////////////////////////////////////////////
+ /*                        *
+ ** Database Interface     **
+ *                         */
+////////////////////////////////////////////////////////////////////////////////
+
 var mongoose = require('mongoose');
 var UserModel = require('./schemas/users');
+var PostModel = require('./schemas/posts');
 
 // Connections
 var developmentDb = 'mongodb://localhost/test';
@@ -37,3 +41,4 @@ db.once('open', function callback () {
 });
 
 exports.users = UserModel;
+exports.posts = PostModel;

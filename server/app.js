@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////////////
+ /*               *
+ ** Express API  **
+ *                */
+////////////////////////////////////////////////////////////////////////////////
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -5,17 +11,20 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+/***********************/
+ //                    //
+ // Route Imports      //
+ //                    //
+/***********************/
+
 // Always relative paths in Express
 var routes = require('./router/index');
 var users = require('./router/routes/users');
+var posts = require('./router/routes/posts');
 
-/**
- * Route Imports
- */
-
-// var signup = require('./routes/signup'); ---Refactor
 
 var app = express();
+
 
 // view engine setup
 
@@ -27,11 +36,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-/**
- * Development Settings
- */
+
+/***********************/
+ //                    //
+ // Development Setup  //
+ //                    //
+/***********************/
 
 if (app.get('env') === 'development') {
+
+    // run seed file
+    require('./database/seed');
+
     // This will change in production since we'll be using the dist folder
     app.use(express.static(path.join(__dirname, '../client')));
     // This covers serving up the index page
@@ -48,9 +64,13 @@ if (app.get('env') === 'development') {
     });
 }
 
-/**
- * Production Settings
- */
+
+/***********************/
+ //                    //
+ // Production Setup   //
+ //                    //
+/***********************/
+
 if (app.get('env') === 'production') {
 
     // changes it to use the optimized version for production
@@ -67,13 +87,17 @@ if (app.get('env') === 'production') {
     });
 }
 
-/**
- * Routes
- */
-var router = require('./router')(app);
+
+/***************************/
+ //                        //
+ // Router Instantiation   //
+ //                        //
+/**************************/
 
 // Pulling in router/index.js, passing it
 // an instance of our Express application
+var router = require('./router')(app);
+
 
 // Error Handling
 app.use(function(err, req, res, next) {
