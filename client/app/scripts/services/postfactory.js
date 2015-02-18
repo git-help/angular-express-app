@@ -28,7 +28,9 @@ angular.module('clientApp')
     };
     //UPDATE
     postFactory.updatePost = function (post) {
-      return $http.put(urlBase, post);
+      console.log(post._id);
+      var post_id = post._id;
+      return $http.put(urlBase + '/' + post._id);
     };
     //DELETE
     postFactory.deletePost = function (id) {

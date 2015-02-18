@@ -22,38 +22,39 @@ angular.module('clientApp')
             $scope.posts = posts;
             console.log(posts);
         })
-        .error(function (error) {
+        .error(function (data, status, headers, config) {
             $scope.status = 'Unable to load post data: ' + error.message;
         });
     };
 
     //edit a post
-    $scope.edit = function () {
+    $scope.editPost = function () {
+      console.log(this.editing);
       this.editing = true;
     };
     //update a post
     $scope.updatePost = function (id) {
-      console.log(this.post._id);
+      // console.log(this.post._id);
+      console.log(this.post);
       var post = this.post;
       var that = this;
-      for (var i = 0; i < $scope.posts.length; i++) {
-        var currPost = $scope.posts[i];
-
-        if (currPost._id === id) {
-          post = currpost;
-          break;
-        }
-      };
-
-      postFactory.updatePost(post)
-        .success(function () {
-          $scope.status = 'Updated Post! Refreshing post list.';
-          that.editing = false;
-
-        })
-        .error(function (error) {
-          $scope.status = 'Unable to update post: ' + error.message;
-        });
+      // need to figure out how to pass
+      // in the object... and build the correct path... 
+      // maybe we can start declaring variables here... 
+      //e.g. var reqUrl = /posts/post._id
+      //reqParams = this.title, this.text, this.url
+      //or just NOT use the service for update..
+      //and build it long-hand.
+      postFactory.updatePost(this.post)
+      .error(function (data, status, headers, config) {
+        $scope.formError = true;
+        $scope.status = 'Unable to update post: ' + data;
+      })
+      .success(function (data) {
+        $scope.status = 'Updated Post! Refreshing post list.';
+        that.editing = false;
+      });
+      
     };
 
     $scope.createPost = function () {
@@ -66,7 +67,7 @@ angular.module('clientApp')
           $scope.posts.push(post);
           $scope.newPost = {};
         }).
-        error(function(error) {
+        error(function(data, status, headers, config) {
           $scope.formError = true;
           $scope.status = 'Unable to create Post: ' + error.message;
         });
@@ -85,7 +86,7 @@ angular.module('clientApp')
             }
           }
         })
-        .error(function (error) {
+        .error(function (data, status, headers, config) {
             $scope.status = 'Unable to delete Post: ' + error.message;
         });
     };
