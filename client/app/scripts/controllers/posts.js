@@ -107,4 +107,21 @@ angular.module('clientApp')
       });
     };
 
+    $scope.isSomething = true;
+    $scope.codemirrorLoaded = function(_editor){
+      // Editor part
+      var _doc = _editor.getDoc();
+      _editor.focus();
+
+      // Options
+      _editor.setOption('theme', 'vibrant-ink');
+      _editor.setOption('value', 'some test');
+      _editor.setOption('mode', 'javascript');
+
+      // Events
+      // _editor.on("beforeChange", function(){ console.log('beforeChange'); });
+      // // write new value to database?
+      // _editor.on("change", function(){ console.log('onChange');});
+    };
+
   }]);

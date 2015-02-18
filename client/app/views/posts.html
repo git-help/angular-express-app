@@ -1,6 +1,11 @@
 <div class="row">
   <div class="col-xs-12">
 
+    <!-- START codemirror instance -->
+    <div ui-codemirror="{ onLoad : codemirrorLoaded }" ></div>
+    <!-- END codemirror instance -->
+
+
     <!-- START createPost form -->
     <div> 
         <form ng-submit="createPost()" role="form">
