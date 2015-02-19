@@ -8,7 +8,7 @@
  * Controller of the githelpApp
  */
 angular.module('githelpApp')
-  .controller('PostsCtrl', ['$scope', '$http', 'postFactory', function ($scope, $http, postFactory) {
+  .controller('PostsCtrl', ['$scope', '$http', 'postFactory', 'offset', function ($scope, $http, postFactory, offset) {
     // instantiate local variables for posts then...
     var posts;
     // add to controllers $scope
@@ -41,6 +41,34 @@ angular.module('githelpApp')
       this.editing = true;
     };
 
+    /***********************/
+     //                    //
+     // CRUD               //
+     //                    //
+    /***********************/
+
+    // handle createPost form
+    $scope.createPost = function () {
+      var post = $scope.newPost;
+      postFactory.createPost(post)
+        .success(function (data) {
+          $scope.status = 'created Post! Refreshing Post list.';
+          // post._id is returned from API
+          // to allow on-page editing, we need this _id
+          // to 'hook' onto.
+          // therefore, we add the key/value to the post
+          // before sending to the $scope
+          post._id = data;
+          $scope.posts.push(post);
+          $scope.newPost = {};
+          $scope.createPostForm = false;
+        }).
+        error(function(data, status, headers, config) {
+          $scope.formError = true;
+          $scope.status = 'Unable to create Post: ' + error.message;
+        });
+    };
+
     //update a post
     $scope.updatePost = function (post) {
       var post = this.post;
@@ -65,28 +93,6 @@ angular.module('githelpApp')
       
     };
 
-    // handle createPost form
-    $scope.createPost = function () {
-      var post = $scope.newPost;
-      postFactory.createPost(post)
-        .success(function (data) {
-          $scope.status = 'created Post! Refreshing Post list.';
-          // post._id is returned from API
-          // to allow on-page editing, we need this _id
-          // to 'hook' onto.
-          // therefore, we add the key/value to the post
-          // before sending to the $scope
-          post._id = data;
-          $scope.posts.push(post);
-          $scope.newPost = {};
-          $scope.createPostForm = false;
-        }).
-        error(function(data, status, headers, config) {
-          $scope.formError = true;
-          $scope.status = 'Unable to create Post: ' + error.message;
-        });
-    };
-
     // handle delete() for this.post
     $scope.deletePost = function (id) {
       postFactory.deletePost(this.post._id)
@@ -104,6 +110,13 @@ angular.module('githelpApp')
           $scope.status = 'Unable to delete Post: ' + error.message;
       });
     };
+
+
+    /***********************/
+     //                    //
+     // CodeMirror         //
+     //                    //
+    /***********************/
 
     // setup codemirror textareas on-load
     $scope.codemirrorLoaded = function(_editor, post){
