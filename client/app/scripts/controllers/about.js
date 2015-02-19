@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name clientApp.controller:AboutCtrl
+ * @name githelpApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the clientApp
+ * Controller of the githelpApp
  */
-angular.module('clientApp')
+angular.module('githelpApp')
   .controller('AboutCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

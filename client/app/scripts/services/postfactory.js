@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name clientApp.postFactory
+ * @name githelpApp.postFactory
  * @description
  * # postFactory
- * Factory in the clientApp.
+ * Factory in the githelpApp.
  */
-angular.module('clientApp')
+angular.module('githelpApp')
   .factory('postFactory', ['$http', function ($http) {
     // Service logic
     var urlBase = '/posts';

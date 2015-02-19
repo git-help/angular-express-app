@@ -2,11 +2,11 @@
 
 /**
  * @ngdoc directive
- * @name clientApp.directive:codemirror
+ * @name githelpApp.directive:codemirror
  * @description
  * # codemirror
  */
-angular.module('clientApp')
+angular.module('githelpApp')
   .directive('codemirror', function () {
     return {
       template: '<div></div>',

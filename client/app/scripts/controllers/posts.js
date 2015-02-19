@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name clientApp.controller:PostsCtrl
+ * @name githelpApp.controller:PostsCtrl
  * @description
  * # PostsCtrl
- * Controller of the clientApp
+ * Controller of the githelpApp
  */
-angular.module('clientApp')
+angular.module('githelpApp')
   .controller('PostsCtrl', ['$scope', '$http', 'postFactory', function ($scope, $http, postFactory) {
     // instantiate local variables for posts then...
     var posts;

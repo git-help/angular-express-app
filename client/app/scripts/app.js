@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name clientApp
+ * @name githelpApp
  * @description
- * # clientApp
+ * # githelpApp
  *
  * Main module of the application.
  */
 angular
-  .module('clientApp', [
+  .module('githelpApp', [
     'ngAnimate',
     'ngAria',
     'ngCookies',
