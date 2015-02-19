@@ -1,91 +1,152 @@
 <div class="row">
   <div class="col-xs-12">
 
-
-    <!-- START createPost form -->
-    <div> 
-        <form ng-submit="createPost()" role="form">
-          <legend>Post Form</legend>
-          <fieldset>
-          <div class="form-group">
-            <input    type="text" ng-model="newPost.title"    placeholder="title"    class="form-control">
-          </div>
-          <div class="form-group">
-            <input    type="text" ng-model="newPost.text"    placeholder="text"    class="form-control">
-          </div>
-          <div class="form-group">
-            <input    type="text" ng-model="newPost.url"    placeholder="url"    class="form-control">
-          </div>
-          <div class="form-group well">
-            <textarea ui-codemirror="{ onLoad : codemirrorLoaded }" ng-model="newPost.snippet" cols="30" rows=""></textarea>
-          </div>
-          <div>
-            <input    type="text" ng-model="newPost.url"    placeholder="url"    class="form-control">
-          </div>
-          <button class="btn btn-primary">Save Post</button>
-          </fieldset>
-        </form>
-    </div>
-    <!-- END createPost form -->
-
-
-    <!-- START post list -->
-    <div ng-repeat="post in posts track by $index">
-
-      <form ng-submit="updatePost()" ng-show="editing" role="form">
-      <legend>Edit post</legend>
+    <form ng-submit="showCreatePostForm()">
+      <button ng-submit="showCreatePostForm()" class="btn btn-block btn-primary">Git-Help Someone</button>
+      <hr>
+    </form>
+    
+    <div ng-show="createPostForm">
+      <!-- START createPost form -->
+      <form ng-submit="createPost()" class="form-horizontal">
+        <legend>Git-Give Some Advice</legend>
         <fieldset>
+        <!-- Title-->
         <div class="form-group">
-          <input    type="text" ng-model="post.title"    placeholder="title"    class="form-control">
-        </div>
-        <div class="form-group">
-          <input    type="text" ng-model="post.text"    placeholder="text"    class="form-control">
-        </div>
-        <div class="form-group">
-          <input    type="text" ng-model="post.url"    placeholder="url"    class="form-control">
-        </div>
-        <div class="form-group">
-          <textarea ui-codemirror="{ onLoad : codemirrorLoaded }"  ng-model="post.snippet" cols="30" rows="5"></textarea>
-        </div>
-        <div><button class="btn btn-success">Update Post</button></div>
-        </fieldset>
-        <hr>
-      </form>
-
-      <div ng-hide="editing">
-        <div class="panel panel-success">
-          <div class="panel-heading"><div class="post-title">{{post.title}}</div></div>
-          <div class="panel-body">
-            <div class="post-id">{{post._id}}</div>
-            <div class="post-text">{{post.text}}</div>
-            <div class="post-url">{{post.url}}</div>
-            <div>
-              <button ng-click="deletePost()" class="btn btn-danger" >Delete</button>
-              <button ng-click="editPost()"   class="btn btn-edit">Edit</button>
-            </div>
+          <div class="col-md-4">
+          <input ng-model="newPost.title" type="text" placeholder="Title" class="form-control input-md" required="">
+          <span class="help-block">please keep under 50 chars</span>  
           </div>
-          <!-- START codemirror instance -->
-          <!-- ui-codemirror-opts= -->
-            <ui-codemirror class="post-snippet" ui-codemirror-opts="{
-                                                'value': '{{post.snippet}}',
+        </div>
+        <!-- Resource URL-->
+        <div class="form-group">
+          <div class="col-md-4">
+          <input ng-model="newPost.url" type="text" placeholder="where did you find this?" class="form-control input-md">
+          <span class="help-block">let us know where you found this little gem</span>  
+          </div>
+        </div>
+        <!-- Text (description) -->
+        <div class="form-group">
+          <div class="col-md-4">
+            <textarea ng-model="newPost.text" class="form-control" cols="30" rows="5"></textarea>
+            <span class="help-block">and you found this interesting or helpful because...</span> 
+          </div>
+        </div>
+        <!-- Snippet -->
+        <div class="form-group">
+          <div class="col-md-4">
+            <textarea ui-codemirror ng-model="newPost.snippet" ui-codemirror-opts="{
+                                                'value': '//snippet goes here...',
                                                 'theme': 'vibrant-ink',
                                                 'mode' : 'javascript'
                                                 }"
-                           ></ui-codemirror>
-            <!-- <div class="post-snippet" ui-codemirror="{ onLoad : codemirrorLoaded }" ></div> -->
+            ></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4">
+            <button class="btn-large btn-block btn-primary">Save Post</button>
+          </div>
+        </div>
+        </fieldset>
+      </form>
+      <!-- END createPost form -->
+    </div>
+
+    <!-- START post list -->
+    <div ng-repeat="post in posts track by $index">
+      
+      <!-- START editPost form -->
+      <form ng-submit="updatePost()" ng-show="editing" class="form-horizontal">
+        <legend>Edit Your Advice</legend>
+        <fieldset>
+        <!-- Title-->
+        <div class="form-group">
+          <div class="col-md-4">
+          <input ng-model="post.title" type="text" placeholder="Title" class="form-control input-md" required="">
+          <span class="help-block">please keep under 50 chars</span>  
+          </div>
+        </div>
+        <!-- Resource URL-->
+        <div class="form-group">
+          <div class="col-md-4">
+          <input ng-model="post.url" type="text" placeholder="where did you find this?" class="form-control input-md">
+          <span class="help-block">let us know where you found this little gem</span>  
+          </div>
+        </div>
+        <!-- Text (description) -->
+        <div class="form-group">
+          <div class="col-md-4">
+            <textarea ng-model="post.text" class="form-control" cols="30" rows="5"></textarea>
+            <span class="help-block">and you found this interesting or helpful because...</span> 
+          </div>
+        </div>
+        <!-- Snippet -->
+        <div class="form-group">
+          <div class="col-md-4">
+            <textarea ui-codemirror="{ onLoad : codemirrorLoaded }"  ng-model="post.snippet"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4">
+            <button class="btn-large btn-block btn-primary">Update Post</button>
+          </div>
+        </div>
+        </fieldset>
+      </form>
+      <!-- END editPost form -->
+
+
+      <!-- START postDetails -->
+      <div ng-hide="editing">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <div class="post-title">
+              <!-- Title--> <!-- Resource URL-->
+              <h4>{{post.title}} 
+                <a class="post-url" href="{{post.url}}"><i class="fa fa-globe fa-fw"></i></a>
+              </h4>
+            </div>
+          </div>
+          <div class="panel-body">
+            <!-- Text (description) -->
+            <div class="post-text">{{post.text}}</div>
+            <hr>
+            <!-- Post Actions -->
+            <div class="btn-group btn-group-justified" role="group" aria-label="Post Action Button Group">
+              <!-- Share-->
+              <div class="btn-group" role="group">
+                <button class="btn btn-primary"><i class="fa fa-share-square-o fa-fw"></i> Share</button>
+              </div>
+              <!-- Edit-->
+              <div class="btn-group" role="group">
+                <button ng-click="editPost()" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i> Edit</button>
+              </div>
+              <!-- Delete-->
+              <div class="btn-group" role="group">
+                <button ng-click="deletePost()" class="btn btn-danger" ><i class="fa fa-trash-o fa-fw"></i> Delete</button>
+              </div>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <!-- START codemirror instance -->
+            <ui-codemirror class="post-snippet" ui-codemirror-opts="{
+                                                'value': '{{post.snippet}}',
+                                                'theme': 'vibrant-ink',
+                                                'mode' : 'javascript',
+                                                'lineNumbers': 'true',
+                                                'lineWrapping': 'true'
+                                                }"
+            ></ui-codemirror>
+          </div>
           <!-- END codemirror instance -->
           <hr>
         </div>
-
       </div>
+      <!-- END postDetails -->
 
     </div>
     <!-- END post list -->
 
-
-
-
-
   </div>
 </div>
-

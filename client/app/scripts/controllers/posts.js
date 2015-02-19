@@ -29,6 +29,12 @@ angular.module('clientApp')
         });
     };
 
+    //display the createPostForm
+    $scope.showCreatePostForm = function () {
+      // allow button to toggle on/off
+      this.createPostForm = this.createPostForm === false ? true: false;
+    };
+
     //edit a post, when triggered, the edit form will show
     $scope.editPost = function () {
       // console.log(this.editing);
@@ -73,6 +79,7 @@ angular.module('clientApp')
           post._id = data;
           $scope.posts.push(post);
           $scope.newPost = {};
+          $scope.createPostForm = false;
         }).
         error(function(data, status, headers, config) {
           $scope.formError = true;
@@ -106,6 +113,8 @@ angular.module('clientApp')
       // Options
       _editor.setOption('theme', 'vibrant-ink');
       _editor.setOption('mode', 'javascript');
+      _editor.setOption('lineNumbers', 'true');
+      _editor.setOption('lineWrapping', 'true');
 
       // Events
       // kept for reference and extendability later on

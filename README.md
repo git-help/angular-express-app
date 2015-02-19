@@ -76,3 +76,5 @@ write about our feeling of "not coding enough"
 decision to go the "hard way" knowing that focusing on a particular set of tools for a month will make us actually "know it" and we didnt want to wait a week and just do a project that showcased rails.
 
 about pair-programming only being effective if one or both have a decent amout of experience with the stack.
+
+>* [Learning JavaScript Design Patterns by Addy Osmani](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#detailmvcmvp)

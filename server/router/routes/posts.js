@@ -98,7 +98,8 @@ router.route('/')
       // on successful save, respond with id
       // so that we can provide front-end a 'hook'
       // without refreshing the page
-      res.status(201).json(newPost.id);
+      console.log(newPost);
+      res.status(201).json(newPost._id);
     });
 
 });
@@ -155,9 +156,9 @@ router.route('/:post_id')
         }
 
         // if no error, update the post and...
-        post.title   = title;
-        post.text    = text;
-        post.url     = url;
+        post.title = title;
+        post.text = text;
+        post.url = url;
         post.snippet = snippet;
 
         // save the post

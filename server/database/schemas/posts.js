@@ -14,7 +14,7 @@ var postSchema = new Schema({
         required: true,
         type: String,
         trim: true,
-        match: /^([\w ,.!?]{1,100})$/
+        // match: /^([\w ,.!?]{1,100})$/
       },
     url: {
         type: String,
