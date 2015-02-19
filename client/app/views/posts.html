@@ -2,7 +2,7 @@
   <div class="col-xs-12">
 
     <form ng-submit="showCreatePostForm()">
-      <button ng-submit="showCreatePostForm()" class="btn btn-block btn-primary">Git-Help Someone</button>
+      <button ng-submit="showCreatePostForm()" class="btn btn-block btn-primary"> <i class="fa fa-heart fa-fw"></i> Git-Help Someone</button>
       <hr>
     </form>
     
@@ -88,7 +88,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+          <div class="col-xs-12">
             <button class="btn-large btn-block btn-primary">Update Post</button>
           </div>
         </div>
@@ -99,6 +99,7 @@
 
       <!-- START postDetails -->
       <div ng-hide="editing">
+        <!-- START panel -->
         <div class="panel panel-success">
           <div class="panel-heading">
             <div class="post-title">
@@ -110,9 +111,31 @@
           </div>
           <div class="panel-body">
             <!-- Text (description) -->
-            <div class="post-text">{{post.text}}</div>
-            <hr>
-            <!-- Post Actions -->
+            <p class="post-text text-muted">{{post.text}}</p>
+          </div>
+        </div>
+        <!-- END panel -->
+
+        <!-- START codemirror instance -->
+        <div class="row">
+          <div class="col-xs-12">
+            <ui-codemirror class="post-snippet" ui-codemirror-opts="{
+                                                'value': '{{post.snippet}}',
+                                                'theme': 'vibrant-ink',
+                                                'mode' : 'javascript',
+                                                'lineNumbers': 'true',
+                                                'lineWrapping': 'true'
+                                                }"
+            ></ui-codemirror>
+          </div>
+        </div>
+        <!-- END codemirror instance -->
+
+        <div class="divider"></div>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <!-- START Post Actions -->
             <div class="btn-group btn-group-justified" role="group" aria-label="Post Action Button Group">
               <!-- Share-->
               <div class="btn-group" role="group">
@@ -127,24 +150,14 @@
                 <button ng-click="deletePost()" class="btn btn-danger" ><i class="fa fa-trash-o fa-fw"></i> Delete</button>
               </div>
             </div>
+            <!-- END Post Actions -->
           </div>
-          <div class="panel-footer">
-            <!-- START codemirror instance -->
-            <ui-codemirror class="post-snippet" ui-codemirror-opts="{
-                                                'value': '{{post.snippet}}',
-                                                'theme': 'vibrant-ink',
-                                                'mode' : 'javascript',
-                                                'lineNumbers': 'true',
-                                                'lineWrapping': 'true'
-                                                }"
-            ></ui-codemirror>
-          </div>
-          <!-- END codemirror instance -->
-          <hr>
         </div>
+
+        <div class="divider"></div>
+
       </div>
       <!-- END postDetails -->
-
     </div>
     <!-- END post list -->
 
