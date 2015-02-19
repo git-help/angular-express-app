@@ -69,15 +69,17 @@ router.route('/')
   .post(function (req, res, next) {
 
     // set req params to local variables
-    var title = req.body.title,
-        text  = req.body.text,
-        url   = req.body.url;
+    var title   = req.body.title,
+        text    = req.body.text,
+        url     = req.body.url,
+        snippet = req.body.snippet;
 
     // create a new instance of the Post model
     var newPost = new Post({
-                          'title': title,
-                          'url'  : url,
-                          'text' : text
+                          'title'  : title,
+                          'url'    : url,
+                          'text'   : text,
+                          'snippet': snippet
     });
 
     // save instance to db
@@ -135,9 +137,10 @@ router.route('/:post_id')
   // accessed at (/posts/:post_id)
   .put(function (req, res) {
     // first set req params to local variables
-    var title = req.body.title,
-        text  = req.body.text,
-        url   = req.body.url,
+    var title   = req.body.title,
+        text    = req.body.text,
+        url     = req.body.url,
+        snippet = req.body.snippet,
         post_id = req.params.post_id;
 
     // then, use Model to find the post we want
@@ -152,9 +155,10 @@ router.route('/:post_id')
         }
 
         // if no error, update the post and...
-        post.title = title;
-        post.text  = text;
-        post.url   = url;
+        post.title   = title;
+        post.text    = text;
+        post.url     = url;
+        post.snippet = snippet;
 
         // save the post
         post.save(function (err) {

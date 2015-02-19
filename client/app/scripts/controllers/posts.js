@@ -11,7 +11,7 @@ angular.module('clientApp')
   .controller('PostsCtrl', ['$scope', '$http', 'postFactory', function ($scope, $http, postFactory) {
     
     var posts;
-    $scope.posts = posts = {};
+    $scope.posts = posts = [];
 
     // populate $scope.posts and posts using postFactory
     getPosts();
@@ -37,9 +37,10 @@ angular.module('clientApp')
       var post = this.post;
       var that = this;
       postFactory.updatePost(post._id , { 
-                                        title: post.title,
-                                        text: post.text,
-                                        url: post.url })
+                                        title   : post.title,
+                                        text    : post.text,
+                                        url     : post.url,
+                                        snippet : post.snippet })
       .error(function (data, status, headers, config) {
         $scope.formError = true;
         $scope.status = 'Unable to update post: ' + data;
@@ -47,6 +48,7 @@ angular.module('clientApp')
       .success(function (data) {
         $scope.status = 'Updated Post! Refreshing post list.';
         that.editing = false;
+        data.snippet = isChanged();
         console.log(data);
       });
       
@@ -107,15 +109,26 @@ angular.module('clientApp')
       });
     };
 
-    $scope.isSomething = true;
-    $scope.codemirrorLoaded = function(_editor){
+    $scope.isChanged = function (){
+      this.snippet;
+    };
+    
+    //  $scope.posts.angular.forEach($scope.posts, function(post.snippet, snippet) {
+    //   this.push(key + ': ' + value);
+    // }, log);
+    // angular.forEach(values, function(value, key) {
+    //   this.push(key + ': ' + value);
+    // }, log)
+    // $scope.posts.angular.forEach(post, funciton (){})
+    $scope.codemirrorLoaded = function(_editor, post){
+      console.log(post);
       // Editor part
       var _doc = _editor.getDoc();
       _editor.focus();
 
       // Options
       _editor.setOption('theme', 'vibrant-ink');
-      _editor.setOption('value', 'some test');
+      // _editor.setOption('value', 'hard-coded value' );
       _editor.setOption('mode', 'javascript');
 
       // Events

@@ -26,6 +26,11 @@ var postSchema = new Schema({
         trim: true,
         max: 2000
     },
+    snippet: {
+        type: String,
+        trim: true,
+        max: 2000
+    }
     // comments: [{
     //     text: {
     //         type: String,
