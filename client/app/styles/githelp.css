@@ -5,7 +5,8 @@
     font-family: 'Inconsolata', monospace; /* use roboto as body font */
     font-size: 1.1em;
     line-height: 1.1em;
-    height: 300px;
+    height: auto;
+    margin-bottom: 1em;
     border: 1px solid transparent;
     /*border-radius: 1px;*/
     /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);*/
@@ -14,6 +15,10 @@
 .CodeMirror-gutter {background-color: rgba(40,40,40,1);}
 .CodeMirror-linenumbers{color:rgba(130,130,130,1);}
 
+/*add border to input of snippet to aide user experience*/
+.add-border {
+   border: 1px solid #FF5722;
+}
 /*custom global styles*/
 hr {
   margin-top: 1em;
