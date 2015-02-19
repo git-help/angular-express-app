@@ -9,13 +9,15 @@
  */
 angular.module('clientApp')
   .controller('PostsCtrl', ['$scope', '$http', 'postFactory', function ($scope, $http, postFactory) {
-    
+    // instantiate local variables for posts then...
     var posts;
+    // add to controllers $scope
     $scope.posts = posts = [];
 
     // populate $scope.posts and posts using postFactory
     getPosts();
 
+    // request all posts from our Express API
     function getPosts() {
       postFactory.getPosts()
         .success(function (posts) {
@@ -32,7 +34,8 @@ angular.module('clientApp')
       // console.log(this.editing);
       this.editing = true;
     };
-    // //update a post
+
+    //update a post
     $scope.updatePost = function (post) {
       var post = this.post;
       var that = this;
@@ -48,30 +51,15 @@ angular.module('clientApp')
       .success(function (data) {
         $scope.status = 'Updated Post! Refreshing post list.';
         that.editing = false;
-        data.snippet = isChanged();
-        console.log(data);
+        // hack to refresh page after update.
+        // allows codemirror to display correct values.
+        // Will need to refactor later.
+        location.reload();
       });
       
     };
-    //update a post w/o postFactory method.
-    // $scope.updatePost = function (post) {
-    //   var post = this.post;
-    //   console.log(this.post._id);
-    //   console.log(this.post.title);
-    //   var that = this;
-    //   $http.put('/posts/'+ post._id , { 
-    //                                     title: this.post.title,
-    //                                     text: this.post.text,
-    //                                     url: this.post.url })
-    //        .error(function () {
-    //          $scope.formError = true;
-    //        })
-    //        .success(function (data) {
-    //          that.editing = false;
-    //        })
-    //        ;
-    // };
 
+    // handle createPost form
     $scope.createPost = function () {
       var post = $scope.newPost;
       postFactory.createPost(post)
@@ -92,6 +80,7 @@ angular.module('clientApp')
         });
     };
 
+    // handle delete() for this.post
     $scope.deletePost = function (id) {
       postFactory.deletePost(this.post._id)
       .success(function () {
@@ -109,29 +98,17 @@ angular.module('clientApp')
       });
     };
 
-    $scope.isChanged = function (){
-      this.snippet;
-    };
-    
-    //  $scope.posts.angular.forEach($scope.posts, function(post.snippet, snippet) {
-    //   this.push(key + ': ' + value);
-    // }, log);
-    // angular.forEach(values, function(value, key) {
-    //   this.push(key + ': ' + value);
-    // }, log)
-    // $scope.posts.angular.forEach(post, funciton (){})
+    // setup codemirror textareas on-load
     $scope.codemirrorLoaded = function(_editor, post){
-      console.log(post);
       // Editor part
       var _doc = _editor.getDoc();
       _editor.focus();
-
       // Options
       _editor.setOption('theme', 'vibrant-ink');
-      // _editor.setOption('value', 'hard-coded value' );
       _editor.setOption('mode', 'javascript');
 
       // Events
+      // kept for reference and extendability later on
       // _editor.on("beforeChange", function(){ console.log('beforeChange'); });
       // // write new value to database?
       // _editor.on("change", function(){ console.log('onChange');});
