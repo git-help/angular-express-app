@@ -34,7 +34,7 @@
 -----------------------------------------
 
 ## Getting started
-  > This project is an Angular Express app w/ two directory setup: server &amp; client.  Serves Angular app by default and allow it to handle routing. 
+  > This project is an Angular Express app w/ a two directory setup: server &amp; client.  Serves Angular app by default and allows it to handle routing. 
 
 ### Working with app in development:
 >1. You need to have two command line tabs open. 
@@ -55,5 +55,5 @@
 >3. in the server tab run:
   >- `$ npm start`
   >- Production ready application will be served on localhost:3000
->4. Now, your server folder is what you'd deploy
+>4. Now, your server folder is ready to be deployed
 

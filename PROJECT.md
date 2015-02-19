@@ -23,3 +23,10 @@
 7. Connect the front-end Angular app to this API
 8. Tack on some additional functionality, just because...
 9. Have an opinion on the folder structure and architectural choices in a given 'project': Seeing the various generators scaffolding was highly educational. While we chose the Rails-esque structure to learn from, the more modular folder structure seen in the angular-fullstack generator which puts all files related to a module together (Controller, View, Tests, etc.). 
+
+
+### Wish-List
+1. Real-time chat
+  - Use Firebase/FireChat or Sockets.
+2. OAuth
+3. Add tags so that each Post is associated with technologies used (i.e. StackOverflow model)
