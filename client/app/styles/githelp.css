@@ -1,3 +1,4 @@
+/*custom codemirror styles*/
 .CodeMirror {
     /* Set height, width, borders, and global font properties here */
     background: rgba(40,40,40,1);
@@ -8,18 +9,25 @@
     border: 1px solid transparent;
     /*border-radius: 1px;*/
     /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);*/
-  }
-  .cm-s-vibrant-ink.CodeMirror{background: rgba(40,40,40,1);}
-  .CodeMirror-gutter {background-color: rgba(40,40,40,1);}
-  .CodeMirror-linenumbers{color:rgba(130,130,130,1);}
+}
+.cm-s-vibrant-ink.CodeMirror{background: rgba(40,40,40,1);}
+.CodeMirror-gutter {background-color: rgba(40,40,40,1);}
+.CodeMirror-linenumbers{color:rgba(130,130,130,1);}
 
-  hr {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border: 0;
-    border-top: 1px solid #B6B6B6;
-  }
-  .divider{
-    margin-top: 1em;
-    margin-bottom: 1em;
-  }
+/*custom global styles*/
+hr {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 0;
+  border-top: 1px solid #B6B6B6;
+}
+.divider{
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.help-block {
+  margin-bottom: 0px;
+}
+
+/*Additional custom styles are found in app/styles/styles/_variables.scss
+which is copied from bootstrap and overwrites their default styles*/
