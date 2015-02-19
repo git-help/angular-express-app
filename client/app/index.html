@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Git-Help</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -13,67 +12,36 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     
-    <!-- link in codemirror theme -->
-    <link rel="stylesheet" href="bower_components/codemirror/theme/vibrant-ink.css" />
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,700' rel='stylesheet' type='text/css'>
-
     <!-- link in font-awesome icons -->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-
+      <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <!-- link in codemirror theme -->
+      <link rel="stylesheet" href="bower_components/codemirror/theme/vibrant-ink.css" />
+      <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,700' rel='stylesheet' type='text/css'>
     <!-- link in githelp custom styles -->
-    <link rel="stylesheet" href="styles/githelp.css">
-
+      <link rel="stylesheet" href="styles/githelp.css">
   </head>
+
   <body ng-app="clientApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    
+    <!-- include navbar partial -->
+    <div ng-include="'/app/views/partials/_navbar.html'" ></div>
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#/">GitHelp</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/contact">Contact</a></li>
-              <li><a ng-href="#/posts">Posts</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <!-- START App Views -->
     <div class="container">
     <div ng-view=""></div>
     </div>
+    <!-- END App Views -->
 
-    <div class="footer">
-      <div class="container">
-        <p><i class="fa fa-heart"></i> this first, then guitar...</p>
-      </div>
-    </div>
+    <!-- include footer partial -->
+    <div ng-include="'/app/views/partials/_footer.html'" ></div>
 
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!-- Google Analytics: need to change UA-XXXXX-X to site's ID when ready -->
      <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
