@@ -13,28 +13,28 @@
         <fieldset>
         <!-- Title-->
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
           <input ng-model="newPost.title" type="text" placeholder="Title" class="form-control input-md" required="">
           <span class="help-block">please keep under 50 chars</span>  
           </div>
         </div>
         <!-- Resource URL-->
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
           <input ng-model="newPost.url" type="text" placeholder="where did you find this?" class="form-control input-md">
           <span class="help-block">let us know where you found this little gem</span>  
           </div>
         </div>
         <!-- Text (description) -->
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
             <textarea ng-model="newPost.text" class="form-control" cols="30" rows="5"></textarea>
             <span class="help-block">and you found this interesting or helpful because...</span> 
           </div>
         </div>
         <!-- Snippet -->
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
             <textarea ui-codemirror ng-model="newPost.snippet" ui-codemirror-opts="{
                                                 'value': '//snippet goes here...',
                                                 'theme': 'vibrant-ink',
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
             <button class="btn-large btn-block btn-primary">Save Post</button>
           </div>
         </div>
@@ -62,33 +62,33 @@
         <fieldset>
         <!-- Title-->
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
           <input ng-model="post.title" type="text" placeholder="Title" class="form-control input-md" required="">
           <span class="help-block">please keep under 50 chars</span>  
           </div>
         </div>
         <!-- Resource URL-->
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
           <input ng-model="post.url" type="text" placeholder="where did you find this?" class="form-control input-md">
           <span class="help-block">let us know where you found this little gem</span>  
           </div>
         </div>
         <!-- Text (description) -->
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
             <textarea ng-model="post.text" class="form-control" cols="30" rows="5"></textarea>
             <span class="help-block">and you found this interesting or helpful because...</span> 
           </div>
         </div>
         <!-- Snippet -->
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
             <textarea ui-codemirror="{ onLoad : codemirrorLoaded }"  ng-model="post.snippet"></textarea>
           </div>
         </div>
         <div class="form-group">
-          <div class="col-md-4">
+          <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
             <button class="btn-large btn-block btn-primary">Update Post</button>
           </div>
         </div>

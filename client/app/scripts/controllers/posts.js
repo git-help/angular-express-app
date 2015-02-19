@@ -32,7 +32,7 @@ angular.module('clientApp')
     //display the createPostForm
     $scope.showCreatePostForm = function () {
       // allow button to toggle on/off
-      this.createPostForm = this.createPostForm === false ? true: false;
+      this.createPostForm = this.createPostForm === true ? false: true;
     };
 
     //edit a post, when triggered, the edit form will show
