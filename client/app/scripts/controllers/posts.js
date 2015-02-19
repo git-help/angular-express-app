@@ -8,7 +8,7 @@
  * Controller of the githelpApp
  */
 angular.module('githelpApp')
-  .controller('PostsCtrl', ['$scope', '$http', 'postFactory', 'offset', function ($scope, $http, postFactory, offset) {
+  .controller('PostsCtrl', ['$scope', '$http', 'postFactory', function ($scope, $http, postFactory) {
     // instantiate local variables for posts then...
     var posts;
     // add to controllers $scope
